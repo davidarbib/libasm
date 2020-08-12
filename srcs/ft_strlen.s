@@ -2,6 +2,7 @@ section .text
 	global ft_strlen
 
 ft_strlen:
+	push r15
 	mov r15, -1				;	i = -1
 
 notnullchar:
@@ -10,4 +11,5 @@ notnullchar:
 	jne notnullchar			;		loop
 	
 	mov	rax, r15			;	return (i)
+	pop r15
 	ret

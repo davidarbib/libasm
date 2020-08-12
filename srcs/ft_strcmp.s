@@ -2,6 +2,9 @@ section .text
 	global ft_strcmp
 
 ft_strcmp:
+	push r11
+	push r12
+	push r15
 	mov r15, 0										;	i = 0
 
 loop:
@@ -18,6 +21,9 @@ end:
 	movzx rax, r12b									;
 	movzx rbx, r11b									;
 	sub rax, rbx									;	return (tmp1 - tmp2)
+	pop r15
+	pop r12
+	pop r11
 	ret												;
 
 

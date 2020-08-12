@@ -6,7 +6,7 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:53:36 by darbib            #+#    #+#              #
-#    Updated: 2020/08/12 23:13:38 by darbib           ###   ########.fr        #
+#    Updated: 2020/08/12 23:50:24 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,16 +49,24 @@ all : $(NAME)
 bonus : $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $@ $(OBJ)
+	@ar rc $@ $(OBJ)
+	@echo $@ builded !
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.s
 	@mkdir -p objs
-	$(ASM) $(FLAGS) $< -o $@
+	@echo compiling $<
+	@$(ASM) $(FLAGS) $< -o $@
 
 clean :
-	rm -rf $(OBJ_DIR)
+	@echo Cleaning objs...
+	@rm -rf $(OBJ_DIR)
+	@echo ...done
 
 fclean : clean
-	rm -f $(NAME)
+	@echo Total cleaning...
+	@rm -f $(NAME)
+	@rm -f print.o
+	@rm -f print
+	@echo ...done
 
 re : fclean all
