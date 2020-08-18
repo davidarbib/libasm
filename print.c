@@ -6,7 +6,7 @@
 /*   By: darbib <darbib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 01:26:32 by darbib            #+#    #+#             */
-/*   Updated: 2020/08/18 17:10:27 by darbib           ###   ########.fr       */
+/*   Updated: 2020/08/18 19:47:32 by darbib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
+
+struct	s_list
+{
+	void			*data;
+	struct s_list	*next;
+}
 
 int main(int ac, char **av)
 {

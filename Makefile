@@ -6,7 +6,7 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:53:36 by darbib            #+#    #+#              #
-#    Updated: 2020/08/13 19:35:02 by darbib           ###   ########.fr        #
+#    Updated: 2020/08/18 21:15:14 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC = ft_read.s \
 	ft_strlen.s \
 	ft_write.s
 
-SRC_BONUS = ft_atoi_base.s
+SRC_BONUS = ft_atoi_base.s \
+	ft_list_push_front.s 
 
 # ------------------------------------------------------------------------------
 
