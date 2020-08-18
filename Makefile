@@ -6,7 +6,7 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:53:36 by darbib            #+#    #+#              #
-#    Updated: 2020/08/12 23:50:24 by darbib           ###   ########.fr        #
+#    Updated: 2020/08/13 19:35:02 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_DIR = ./srcs/
 # ------------------------------------------------------------------------------
 
 OBJ = $(SRC:%.s=$(OBJ_DIR)%.o)
+OBJ_BONUS = $(SRC_BONUS:%.s=$(OBJ_DIR)%.o)
 
 SRC = ft_read.s \
 	ft_strcmp.s \
@@ -35,6 +36,8 @@ SRC = ft_read.s \
 	ft_strdup.s \
 	ft_strlen.s \
 	ft_write.s
+
+SRC_BONUS = ft_atoi_base.s
 
 # ------------------------------------------------------------------------------
 
@@ -46,7 +49,17 @@ vpath %.s $(SRC_DIR)
 
 all : $(NAME)
 
-bonus : $(NAME)
+test : all
+	gcc print.c $(NAME) -o print
+	./print
+
+test_bonus : bonus
+	gcc print.c $(NAME) -o print
+	./print
+
+bonus : $(NAME) $(OBJ_BONUS)
+	@ar r $(NAME) $(OBJ_BONUS)
+	@echo $(NAME) builded with bonuses !
 
 $(NAME): $(OBJ)
 	@ar rc $@ $(OBJ)

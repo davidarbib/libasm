@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darbib <darbib@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/13 01:26:32 by darbib            #+#    #+#             */
+/*   Updated: 2020/08/18 17:10:27 by darbib           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -52,9 +64,17 @@ int main(int ac, char **av)
 	perror("error ");
 	exit(EXIT_FAILURE);
 	*/
+	/*
 	extern ssize_t ft_write(int fd, const void *buf, size_t count);
 	int ret = ft_write(4, av[1], strlen(av[1]));
 	printf("ret: %d\n", ret);
 	perror("error ");
 	exit(EXIT_FAILURE);
+	*/
+	extern int ft_atoi_base(const char *s, const char *base);
+	int nb = ft_atoi_base(av[1], av[2]);
+	printf("my atoi --%d--\n", nb);
+	int nb2 = atoi(av[1]);
+	printf("true atoi : --%d--\n", nb2);
+	//printf("atoi(arg) : %d\n", atoi(av[1]));
 }
