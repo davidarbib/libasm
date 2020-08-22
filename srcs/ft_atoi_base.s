@@ -18,6 +18,8 @@ section .text
 	extern ft_strlen
 
 ft_atoi_base :
+	cmp rdi, 0										; if s == NULL
+	je end_error									; 	end error
 	call check_base
 	cmp rax, 0										; if check_base == 0
 	je direct_end									;	before stack manip end
@@ -83,6 +85,11 @@ end :
 
 direct_end :
 	ret
+
+end_error:
+	mov rax, 0										; return (0)
+	ret												
+
 					;-------------------------------------;
 					;			base check modules	      ;
 					;-------------------------------------;

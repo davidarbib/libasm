@@ -6,6 +6,8 @@ ft_list_sort :
 	je end_error									; 	end_error
 	cmp qword [rdi], 0								; if head == NULL
 	je end_error									; 	end_error
+	cmp rsi, 0										; if (*cmp) == NULL
+	je end_error									; 	end_error
 	push r12
 	push r13
 	push r14

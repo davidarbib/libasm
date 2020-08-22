@@ -5,6 +5,8 @@ section .text
 	extern malloc
 
 ft_strdup:
+	cmp rdi, 0										; if dest == NULL
+	je end_error									; 	end error
 	call ft_strlen
 	push rdi										;	push(s)
 	mov rdi, rax									;	len = ft_strlen(s)
@@ -19,3 +21,7 @@ ft_strdup:
 
 byebye :
 	ret
+
+end_error:
+	mov rax, 0										; return (NULL)
+	ret												

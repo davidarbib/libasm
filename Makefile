@@ -6,17 +6,18 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 14:53:36 by darbib            #+#    #+#              #
-#    Updated: 2020/08/21 15:02:58 by darbib           ###   ########.fr        #
+#    Updated: 2020/08/22 02:13:51 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libasm.a
-#CFLAGS = -Wall -Wextra -Werror -framework OpenGL -framework AppKit
 ASM = nasm
 FLAGS = -f elf64 
+CC = clang
 
 ifeq ($(DEBUG), 1)
 	FLAGS += -g -F dwarf
+	LFLAGS += -g3
 endif
 
 # ------------------------------------------------------------------------------
@@ -47,19 +48,19 @@ SRC_BONUS = ft_atoi_base.s \
 
 vpath %.s $(SRC_DIR)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test test_bonus bonus
 
 # ------------------------------------------------------------------------------
 
 all : $(NAME)
 
-test : all
-	gcc print.c $(NAME) -o print
-	./print
+test : $(NAME)
+	@echo "Testing executable generated..."
+	@$(CC) $(LFLAGS) print.c $(NAME) -o $@
 
 test_bonus : bonus
-	gcc print.c $(NAME) -o print
-	./print
+	@echo "Bonus testing executable generated..."
+	@$(CC) $(LFLAGS) print_bonus.c $(NAME) -o $@
 
 bonus : $(NAME) $(OBJ_BONUS)
 	@ar r $(NAME) $(OBJ_BONUS)
@@ -82,8 +83,8 @@ clean :
 fclean : clean
 	@echo Total cleaning...
 	@rm -f $(NAME)
-	@rm -f print.o
-	@rm -f print
+	@rm -f test
+	@rm -f test_bonus
 	@echo ...done
 
 re : fclean all

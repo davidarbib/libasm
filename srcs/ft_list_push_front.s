@@ -3,6 +3,12 @@ section .text
 	extern malloc
 
 ft_list_push_front :
+	cmp rdi, 0										; if begin_list == NULL
+	je end_error									; 	end error
+	cmp qword [rdi], 0								; if head == NULL
+	je end_error									; 	end error
+	cmp rsi, 0										; if src == NULL
+	je end_error									; 	end error
 	push r10
 	push r11
 	push r12
@@ -29,4 +35,6 @@ error_malloc :
 	pop r12
 	pop r11	
 	pop r10	
+
+end_error :
 	ret

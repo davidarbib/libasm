@@ -2,6 +2,8 @@ section .text
 	global ft_strlen
 
 ft_strlen:
+	cmp rdi, 0										; if dest == NULL
+	je end_error									; 	end error
 	push r15
 	mov r15, -1				;	i = -1
 
@@ -13,3 +15,7 @@ notnullchar:
 	mov	rax, r15			;	return (i)
 	pop r15
 	ret
+
+end_error:
+	mov rax, 0				; return (0)
+	ret												

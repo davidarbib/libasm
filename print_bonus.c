@@ -6,7 +6,7 @@
 /*   By: darbib <darbib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 01:26:32 by darbib            #+#    #+#             */
-/*   Updated: 2020/08/22 00:11:45 by darbib           ###   ########.fr       */
+/*   Updated: 2020/08/22 00:22:24 by darbib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ int main(int ac, char **av)
 {
 
 	(void)ac;
+
+	/*
+	extern int ft_atoi_base(const char *s, const char *base);
+	int nb = ft_atoi_base(av[1], av[2]);
+	printf("my atoi --%d--\n", nb);
+	int nb2 = atoi(av[1]);
+	printf("true atoi : --%d--\n", nb2);
+	//printf("atoi(arg) : %d\n", atoi(av[1]));
+	*/
 
 	extern void ft_list_push_front(t_list **begin_list, void *data);
 	/*

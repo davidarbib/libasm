@@ -7,6 +7,12 @@ ft_list_remove_if :
 	je end_error									; 	end_error
 	cmp qword [rdi], 0								; if head == NULL
 	je end_error									; 	end_error
+	cmp rsi, 0										; if data_ref == NULL
+	je end_error									; 	end_error
+	cmp rdx, 0										; if (*cmp) == NULL
+	je end_error									; 	end_error
+	cmp rcx, 0										; if (*free_fct) == NULL
+	je end_error									; 	end_error
 	push r12
 	push r13
 	push r14
