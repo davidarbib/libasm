@@ -22,5 +22,5 @@ my_error :
 	ret
 
 end_error:
-	mov rax, 0						; return (0)
+	mov rax, -1						; return (-1)
 	ret												
