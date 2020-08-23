@@ -10,9 +10,9 @@ ZERO equ	48
 NINE equ	57
 
 section .data
-	present_chars: times 128 dd -1	; store char presence in base to detect 
-									; duplicates and position to compute base
-									; change 
+	present_chars: times 128 dd -1		; store char presence in base to detect 
+										; duplicates and position to compute base
+										; change 
 section .text
 	global ft_atoi_base
 	extern ft_strlen
@@ -20,10 +20,11 @@ section .text
 ft_atoi_base :
 	cmp rdi, 0										; if s == NULL
 	je end_error									; 	end error
+	cmp rsi, 0										; if base == NULL
+	je end_error									; 	end error
 	call check_base
 	cmp rax, 0										; if check_base == 0
 	je direct_end									;	before stack manip end
-	;mov [present_chars], -1						; present_chars[0] = -1
 	push r12
 	push r13
 	push r14
@@ -36,7 +37,6 @@ loop_atoi :
 	inc r12											; i++
 	movzx r13, byte [rdi + r12]						; char c = s[i]
 
-	; while (c is whitespace)
 	cmp r13, SPACE
 	je loop_atoi
 	cmp r13, FFEED
@@ -101,8 +101,16 @@ check_base :
 	je base_error
 	cmp byte [rsi + 1], 0
 	je base_error
-	mov r12, 0										; i = 0
+	mov r12, -1										; i = -1
 
+loop_init_present_chars :
+	inc r12											; i++
+	mov dword [present_chars + r12 * 4], -1			; present_chars[i] = -1
+	cmp r12, 128									; if i < 128
+	jl loop_init_present_chars						; 	loop
+	
+	mov r12, 0										; i = 0
+	
 loop_check :
 	movzx r13, byte [rsi + r12]						; char c = base[i]
 
