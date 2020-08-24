@@ -6,7 +6,7 @@
 /*   By: darbib <darbib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 01:26:32 by darbib            #+#    #+#             */
-/*   Updated: 2020/08/22 00:22:24 by darbib           ###   ########.fr       */
+/*   Updated: 2020/08/24 02:22:28 by darbib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,18 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <errno.h>
+
+# define FONT_RED     		"\x1b[31m"
+# define FONT_BOLDRED 		"\x1b[1;31m"
+# define FONT_RED8			"\x1b[38;5;1m\x1b[48;5;7m"
+# define FONT_GREEN   		"\x1b[32m"
+# define FONT_BOLDGREEN 	"\x1b[1;32m"
+# define FONT_YELLOW  		"\x1b[33m"
+# define FONT_BOLDYELLOW	"\x1b[1;33m"
+# define FONT_BLUE    		"\x1b[34m"
+# define FONT_MAGENTA 		"\x1b[35m"
+# define FONT_CYAN    		"\x1b[36m"
+# define FONT_RESET   		"\x1b[0m"
 
 typedef struct				s_list
 {
@@ -41,22 +52,209 @@ void del_fct(void *data)
 	free(data);
 }
 
+void test_atoi_base()
+{
+	printf(FONT_BOLDYELLOW "-----------------ft_atoi_base-----------------\n" FONT_RESET);
+	extern int ft_atoi_base(const char *s, const char *base);
+	printf(FONT_BLUE "Test_1_1 : \n" FONT_RESET);
+	char *nb_s = strdup("42");
+	char *base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_2 : \n" FONT_RESET);
+	nb_s = strdup("0");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_3 : \n" FONT_RESET);
+	nb_s = strdup("-42");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_4 : \n" FONT_RESET);
+	nb_s = strdup("-0");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_5 : \n" FONT_RESET);
+	nb_s = strdup("+42");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_6 : \n" FONT_RESET);
+	nb_s = strdup("+0");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_7 : \n" FONT_RESET);
+	nb_s = strdup("2147483647");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_8 : \n" FONT_RESET);
+	nb_s = strdup("2147483648");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_9 : \n" FONT_RESET);
+	nb_s = strdup("-2147483648");
+	base = strdup("0123456789");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("atoi(|%s|) : %d\n", nb_s, atoi(nb_s));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_10 : \n" FONT_RESET);
+	nb_s = strdup("0");
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_11 : \n" FONT_RESET);
+	nb_s = strdup("10");
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_12 : \n" FONT_RESET);
+	nb_s = strdup("-10");
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_13 : \n" FONT_RESET);
+	nb_s = strdup("+10");
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_13 : \n" FONT_RESET);
+	nb_s = strdup("+1000");
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_14 : \n" FONT_RESET);
+	nb_s = strdup("-1000");
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_15 : \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_16 : \n" FONT_RESET);
+	nb_s = strdup("-a");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_17 : \n" FONT_RESET);
+	nb_s = strdup("+a");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_18 : \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = strdup("-0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_19 : \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = strdup("+0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_20 : \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = strdup("0123456789abc2def");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_21 : \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = strdup("0");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_22 : \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = strdup("");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_23 (SEGV): \n" FONT_RESET);
+	nb_s = NULL;
+	base = strdup("01");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_24 (SEGV): \n" FONT_RESET);
+	nb_s = strdup("a");
+	base = NULL;
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_25 : \n" FONT_RESET);
+	nb_s = strdup("cc");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_26 : \n" FONT_RESET);
+	nb_s = strdup("c;c");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_27 : \n" FONT_RESET);
+	nb_s = strdup("cc;");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_28 : \n" FONT_RESET);
+	nb_s = strdup("    cc");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_29 : \n" FONT_RESET);
+	nb_s = strdup(" +   cc");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_30 : \n" FONT_RESET);
+	nb_s = strdup(" -   cc");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_31 : \n" FONT_RESET);
+	nb_s = strdup("   -cc");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_32 : \n" FONT_RESET);
+	nb_s = strdup("   +cc");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_33 : \n" FONT_RESET);
+	nb_s = strdup("   c+c");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+	printf(FONT_BLUE "Test_1_34 : \n" FONT_RESET);
+	nb_s = strdup("   cc+");
+	base = strdup("0123456789abcdef");
+	printf("ft_atoi_base(|%s|, |%s|) : %d\n", nb_s, base, ft_atoi_base(nb_s, base));
+	printf("\n");
+}
+
+void test_list_push_front()
+{
+	
+}
+
 int main(int ac, char **av)
 {
-
 	(void)ac;
-
-	/*
-	extern int ft_atoi_base(const char *s, const char *base);
-	int nb = ft_atoi_base(av[1], av[2]);
-	printf("my atoi --%d--\n", nb);
-	int nb2 = atoi(av[1]);
-	printf("true atoi : --%d--\n", nb2);
-	//printf("atoi(arg) : %d\n", atoi(av[1]));
-	*/
-
+	test_atoi_base();
+	test_list_push_front();
+/*
+	printf(FONT_BOLDYELLOW "-----------------ft_atoi_base-----------------\n" FONT_RESET);
 	extern void ft_list_push_front(t_list **begin_list, void *data);
-	/*
 	t_list *node = calloc(1, sizeof(t_list));
 	node->data = strdup(" ,ca marche !");
 	node->next = NULL;
@@ -78,8 +276,6 @@ int main(int ac, char **av)
 	void *data3 = (void *)strdup("un");
 	ft_list_push_front(&head, data3); 
 	printf("nb elem : %d\n", ft_list_size(head)); //expected size : 3
-	*/
-	/*
 	extern	void ft_list_sort(t_list **begin_list, int (*cmp)());
 	int a = 5;
 	int b = 9;
@@ -98,7 +294,6 @@ int main(int ac, char **av)
 		printf("%d\n", *((int *)node->data));
 		node = node->next;
 	}
-	*/
 	extern void ft_list_remove_if(t_list **begin_list, void *data_ref, 
 								int (*cmp)(), void (*free_fct)(void *));
 	char *ref = "h";
@@ -128,4 +323,5 @@ int main(int ac, char **av)
 		printf("%s\n", (char *)node->data);
 		node = node->next;
 	}
+	*/
 }
