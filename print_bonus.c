@@ -6,7 +6,7 @@
 /*   By: darbib <darbib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 01:26:32 by darbib            #+#    #+#             */
-/*   Updated: 2020/08/24 02:22:28 by darbib           ###   ########.fr       */
+/*   Updated: 2020/08/24 04:36:08 by darbib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,18 +243,11 @@ void test_atoi_base()
 }
 
 void test_list_push_front()
-{
-	
-}
-
-int main(int ac, char **av)
-{
-	(void)ac;
-	test_atoi_base();
-	test_list_push_front();
-/*
-	printf(FONT_BOLDYELLOW "-----------------ft_atoi_base-----------------\n" FONT_RESET);
+{	
+	printf(FONT_BOLDYELLOW "-------------ft_list_push_front-------------\n" FONT_RESET);
 	extern void ft_list_push_front(t_list **begin_list, void *data);
+
+	printf(FONT_BLUE "Test_2_1 : \n" FONT_RESET);
 	t_list *node = calloc(1, sizeof(t_list));
 	node->data = strdup(" ,ca marche !");
 	node->next = NULL;
@@ -270,20 +263,71 @@ int main(int ac, char **av)
 		printf("%s\n", (char *)node->data);
 		node = node->next;
 	}
+	printf("\n");
 
+	printf(FONT_BLUE "Test_2_2 : \n" FONT_RESET);
+	ft_list_push_front(&node, NULL); 
+	while (node)
+	{
+		printf("%s\n", (char *)node->data);
+		node = node->next;
+	}
+	printf("\n");
+
+	printf(FONT_BLUE "Test_2_3 : \n" FONT_RESET);
+	ft_list_push_front(NULL, strdup("cc")); 
+	printf("\n");
+
+	printf(FONT_BLUE "Test_2_4 : \n" FONT_RESET);
+	node = NULL;
+	ft_list_push_front(&node, strdup("cc")); 
+}
+
+void test_list_size()
+{
+	printf(FONT_BOLDYELLOW "-------------ft_list_size-------------\n" FONT_RESET);
+	extern void ft_list_push_front(t_list **begin_list, void *data);
 	extern int ft_list_size(t_list *begin_list);
-	printf("nb elem : %d\n", ft_list_size(head)); //expected size : 3
-	void *data3 = (void *)strdup("un");
-	ft_list_push_front(&head, data3); 
-	printf("nb elem : %d\n", ft_list_size(head)); //expected size : 3
-	extern	void ft_list_sort(t_list **begin_list, int (*cmp)());
+
+	printf(FONT_BLUE "Test_3_1 : \n" FONT_RESET);
+	
 	int a = 5;
 	int b = 9;
 	int c = -10;
 	int d = 0;
+
 	t_list *head = malloc(sizeof(t_list));
 	head->data = (void *)&a;
 	t_list *null_head = NULL;
+	ft_list_push_front(&head, &b); 
+	ft_list_push_front(&head, &c); 
+	ft_list_push_front(&head, &d);
+	t_list *node = head;
+	printf("nb elem : %d\n", ft_list_size(head)); //expected size : 3
+	void *data3 = (void *)strdup("un");
+	ft_list_push_front(&head, data3); 
+	printf("nb elem : %d\n", ft_list_size(head)); //expected size : 3
+	printf("\n");
+
+	printf(FONT_BLUE "Test_3_2 : \n" FONT_RESET);
+	printf("nb elem : %d\n", ft_list_size(NULL)); //expected size : 0
+	printf("\n");
+}
+
+void test_list_sort()
+{
+	printf(FONT_BOLDYELLOW "-------------ft_list_sort-------------\n" FONT_RESET);
+	extern void ft_list_push_front(t_list **begin_list, void *data);
+	extern void ft_list_sort(t_list **begin_list, int (*cmp)());
+	
+	int a = 5;
+	int b = 9;
+	int c = -10;
+	int d = 0;
+
+	printf(FONT_BLUE "Test_4_1 : \n" FONT_RESET);
+	t_list *head = malloc(sizeof(t_list));
+	head->data = (void *)&a;
 	ft_list_push_front(&head, &b); 
 	ft_list_push_front(&head, &c); 
 	ft_list_push_front(&head, &d);
@@ -294,8 +338,32 @@ int main(int ac, char **av)
 		printf("%d\n", *((int *)node->data));
 		node = node->next;
 	}
+	printf("\n");
+
+	printf(FONT_BLUE "Test_4_2 (SEGV): \n" FONT_RESET);
+	t_list *null_head = NULL;
+	head = malloc(sizeof(t_list));
+	head->data = (void *)&a;
+	ft_list_push_front(&head, &b); 
+	ft_list_push_front(&head, &c); 
+	ft_list_push_front(&head, &d);
+	ft_list_sort(&null_head, cmp_int);
+	node = head;
+	while (node)
+	{
+		printf("%d\n", *((int *)node->data));
+		node = node->next;
+	}
+	printf("\n");
+}
+
+void test_list_remove_if()
+{
+	printf(FONT_BOLDYELLOW "-------------ft_list_remove_if-------------\n" FONT_RESET);
+	extern void ft_list_push_front(t_list **begin_list, void *data);
 	extern void ft_list_remove_if(t_list **begin_list, void *data_ref, 
 								int (*cmp)(), void (*free_fct)(void *));
+	printf(FONT_BLUE "Test_5_1 : \n" FONT_RESET);
 	char *ref = "h";
 	
 	t_list *head = calloc(1, sizeof(t_list));
@@ -323,5 +391,43 @@ int main(int ac, char **av)
 		printf("%s\n", (char *)node->data);
 		node = node->next;
 	}
-	*/
+
+	printf("\n");
+	printf(FONT_BLUE "Test_5_2 (SEGV): \n" FONT_RESET);
+	
+	head = calloc(1, sizeof(t_list));
+	head->data = (void *)s4;
+	s1 = strdup("hello");
+	s2 = strdup("coucou");
+	s3 = strdup("hok");
+	s4 = strdup("anoi");
+	s5 = strdup("hblabla");
+	ft_list_push_front(&head, s5);
+	ft_list_push_front(&head, s3);
+	ft_list_push_front(&head, s1);
+	ft_list_push_front(&head, s2);
+	node = head;
+	while (node)
+	{
+		printf("%s\n", (char *)node->data);
+		node = node->next;
+	}
+	printf("-----------------------------\n");
+	ft_list_remove_if(&head, ref, cmp_remove, del_fct);
+	node = head;
+	while (node)
+	{
+		printf("%s\n", (char *)node->data);
+		node = node->next;
+	}
+}
+
+int main(int ac, char **av)
+{
+	(void)ac;
+	test_atoi_base();
+	test_list_push_front();
+	test_list_size();
+	test_list_sort();
+	test_list_remove_if();
 }
